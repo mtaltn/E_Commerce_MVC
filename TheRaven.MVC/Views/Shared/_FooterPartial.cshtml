@@ -1,0 +1,74 @@
+﻿@if (!User.IsInRole("Admin"))
+{
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <i class="fa-solid fa-truck fa-5x"></i>
+                <span class="mt-2">For products ordered by 15:00h, delivery is same day after payment confirmation.</span>
+            </div>
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <i class="fa-solid fa-truck fa-5x"></i>
+                <span class="mt-2">For products ordered by 15:00h, delivery is same day after payment confirmation.</span>
+            </div>
+        </div>
+
+        <div class="row banner-row" style="background-color:azure">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-data">
+                                    <h6>Contact</h6>
+                                    <ul class="mb-3">
+                                        <li class="bold">Hidropneumat d.o.o.</li>
+                                        <li>Ludbreška 80, 42202 Trnovec Bartolovečki</li>
+                                        <li><a href="mailto:contact@hidropneumat.hr">contact@hidropneumat.hr</a></li>
+                                        <li>+385 42 208 128</li>
+                                        <li>+385 42 683 826</li>
+                                    </ul>
+                                    <div class="footer-social-media mt-4">
+                                        <a href="https://www.facebook.com/hidropneumat/" rel="nofollow noreferrer" class="me-3"><i class="fab fa-facebook fa-3x"></i></a>
+                                        <a href="https://www.instagram.com/hidropneumat/" rel="nofollow noreferrer" class="me-3"><i class="fab fa-instagram fa-3x"></i></a>
+                                        <a href="https://www.linkedin.com/company/hidropneumat-d-o-o-/about/" rel="nofollow noreferrer"><i class="fab fa-linkedin fa-3x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6 order-md-2">
+                                <div class="info-pages">
+                                    <h6>Pages</h6>
+                                    <ul class="pagelist">
+                                        <li><a href="/conditions-of-sale/2/page/">Conditions of sale</a></li>
+                                        <li><a href="/about-us/3/page/">About us</a></li>
+                                        <li><a href="/privacy/6/page/">Privacy</a></li>
+                                        <li><a href="/reclamation/8/page/">Reclamation</a></li>
+                                        <li><a href="/izjava-o-privatnosti/9/page/">Izjava o privatnosti</a></li>
+                                        <li><a href="/politika-kolacica/10/page/">Politika kolačića</a></li>
+                                        <li><a href="javascript:void(0)" class="setcookie">Cookie management</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2 mt-lg-5 text-center" style="margin-right:30px; background-color:aquamarine;">
+            All prices are in euros with VAT. <br />
+            We strive to make the description and images as accurate as possible, however, we cannot guarantee that all data is 100% accurate. <br />
+            We are not responsible for errors in product descriptions, printing errors or price changes.
+        </div>
+    </div>    
+}
+<div>
+    &copy; 2024 - TheRaven.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+</div>

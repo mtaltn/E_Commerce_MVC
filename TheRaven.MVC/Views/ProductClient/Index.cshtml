@@ -1,0 +1,143 @@
+﻿@using TheRaven.Shared.Entity;
+
+@model List<Product>
+@{
+    double? starCount = 0;
+    Product product = new Product();
+}
+<style>
+    .container-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .row {
+        flex-grow: 1;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        /*padding:10px;*/
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .rating-color {
+        color: orange !important;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .close-button {
+        float: right;
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="get" asp-action="Search" asp-controller="FilterProduct">
+            <button type="submit" class="btn btn-warning">Filtre Uygula</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+       
+
+    </div>
+</div>
+
+<div class="container-content">
+    <div class="row mt-5">
+        @foreach (var item in Model)
+        {
+            starCount = item.RateAvg;
+            <div class="col-md-4 mt-2">
+                <div class="card text-black">
+                    @if (starCount != 0)
+                    {
+                        <div class="stars-overlay">
+                            @for (int i = 0; i < starCount; i++)
+                            {
+                                if (i < starCount)
+                                {
+                                    <script>
+                                        document.write('<i class="fa fa-star rating-color"></i>')
+                                    </script>
+                                }
+                            }
+                        </div>
+
+                    }
+                    <i class="fab fa-lg pt-3 pb-1 px-3"></i>
+                    <img src="~/Images/@item.ImageUrl" class="card-img-top" alt="Apple Computer" style="width: 100%; height: 290px;" />
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h5 class="card-title">@item.Name</h5>                            
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <span>@item.Name</span>
+
+                                    <span>@item.DealerPrice.ToString("C")</span>
+                                }
+                                else if (User.IsInRole("Customer"))
+                                {
+                                    <span>@item.Name</span>
+
+                                    <span>@item.Price.ToString("C")</span>
+                                }
+                                else
+                                {
+                                    <span>@item.Name</span>
+
+                                    <span>Bu ürünün fiyatı gösterilemiyor.</span>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <form method="get" asp-controller="ProductClient" asp-action="GetProductById" asp-route-productId="@item.Id">
+                        <button type="submit" class="btn btn-secondary" style="margin-bottom:1px;margin-right:1px">Ürün Detayı</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        }
+    </div>
+    <div class="pagination-container text-center ">
+        <partial name="_pagination"></partial>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <partial name="_FooterPartial" />
+        </div>
+    </footer>
+</div>
+

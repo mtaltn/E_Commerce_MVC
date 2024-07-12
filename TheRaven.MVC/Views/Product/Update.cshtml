@@ -1,0 +1,66 @@
+﻿@model ProductUpdateModel
+
+<div class="row mb-4">
+    <div class="col">
+        <form method="post" enctype="multipart/form-data" asp-action="Update" asp-route-productId="@Model.ProductId">
+            <div class="form-group">
+                <label asp-for="CategoryId">CategoryId</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@((List<SelectListItem>)ViewData["categories"])">
+                    <option selected>Choose</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Product Name</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="product name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Product Description</label>
+                <input asp-for="Description" type="text" class="form-control" placeholder="product description" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="text" class="form-control" placeholder="price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="DealerPrice">Dealer Price</label>
+                <input asp-for="DealerPrice" type="text" class="form-control" placeholder="Dealer Price" />
+                <span asp-validation-for="DealerPrice" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Quantity">Quantity</label>
+                <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feature.ManufacturerNumber">Product Manufacturer Number</label>
+                <input asp-for="Feature.ManufacturerNumber" type="text" class="form-control" placeholder="product Manufacturer Number" />
+                <span asp-validation-for="Feature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feature.Manufacturer">Product Manufacturer</label>
+                <input asp-for="Feature.Manufacturer" type="text" class="form-control" placeholder="product Manufacturer" />
+                <span asp-validation-for="Feature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feature.OurCode">Product OurCode</label>
+                <input asp-for="Feature.OurCode" type="text" class="form-control" placeholder="product Our Code" />
+                <span asp-validation-for="Feature" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile" />
+                <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+            </div>
+            <div class="row mt-3">
+                <div class="col mb-3">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">
+                        <i class="fa fa-arrow-left ml-2"></i>Geri Dön
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

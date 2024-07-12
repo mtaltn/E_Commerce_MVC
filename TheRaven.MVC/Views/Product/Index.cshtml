@@ -1,0 +1,83 @@
+﻿@using TheRaven.Shared.Entity
+@model List<Product>
+
+@if (Model.Count != 0)
+{
+    <div class="col mb-3">
+        <div class="text-end">
+            <form method="get" asp-action="Create" asp-controller="Product">
+                <button type="submit" class="btn btn-warning">Add New Product</button>
+            </form>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="col mt-4">
+            <div class="row">
+                <div class="col-3">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="~/Images/@item.ImageUrl" class="img-fluid" width="215" height="215" style="margin:20px" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="product-info" style="margin-top: 20px;">
+                        <div class="product-name" style="font-weight: bold; font-size: 18px;">@item.Name</div>
+                        <div class="product-price" style="font-size: 16px;">User Price : @item.Price.ToString("C")</div>
+                        <div class="product-price" style="font-size: 16px;">Dealer price : @item.DealerPrice.ToString("C")</div>
+                        <div class="product-features" style="margin-top: 10px;">
+                            <ul style="list-style-type: none; padding-left: 0;">                                
+                                <li><strong>OurCode :</strong> @item.Features.OurCode</li>
+                                <li><strong>ManufacturerNumber :</strong>@item.Features.ManufacturerNumber</li>
+                                <li><strong>Manufacturer :</strong> @item.Features.Manufacturer</li>
+                                <li><strong>Quantity :</strong> @item.Quantity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+
+                <p class="card-text"></p>
+                <div class="row">
+                    <div class="col">
+                        <form method="post" asp-route-productId="@item.Id" asp-controller="Product" asp-action="DeleteProduct">
+                            <button type="submit" class="btn btn-warning">Sil</button>
+                        </form>
+
+                    </div>
+                    <div class="col">
+                        <form method="get" asp-controller="Product" asp-action="Update" asp-route-productId="@item.Id">
+                            <button class="btn btn-primary" type="submit">Update Product</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <form method="get" asp-controller="Product" asp-action="MultipleImage" asp-route-productId="@item.Id">
+                            <button class="btn btn-primary" type="submit">Homepage Images</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <p>Database has not any products.</p>
+        </div>
+        <div class="col">
+            <form method="get" asp-action="Create" asp-controller="Product">
+                <button type="submit" class="btn btn-warning">Add New Product</button>
+            </form>
+        </div>
+    </div>
+}

@@ -1,0 +1,113 @@
+﻿@using E_Commerce_MVC.Constants
+@using Newtonsoft.Json
+
+@{
+    string userId = "0";
+    var isAnyProductBasketItem = Context.Session.GetString(Key.Basket_Items);
+    List<ProductBasketModel> deserialize = null;
+    var count = 0;
+    if (!string.IsNullOrEmpty(isAnyProductBasketItem))
+    {
+        deserialize = JsonConvert.DeserializeObject<List<ProductBasketModel>>(isAnyProductBasketItem);
+        count = deserialize.Count;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TheRaven.MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TheRaven.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Footer yüksekliği */
+        .footer {
+            height: 60px; /* Örnek bir yükseklik değeri */
+        }
+
+        /* İçerik alanı için üst boşluk */
+        .content {
+            margin-top: 80px; /* Header yüksekliği ile aynı olacak şekilde ayarlandı */
+        }
+    </style>
+</head>
+<body>
+    <header id="header" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 col-md-12 col-lg-12">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" asp-area="" asp-controller="ProductClient" asp-action="Index">TheRaven.MVC</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between col-md-8 offset-md-2">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <partial name="_AdminPartial" />
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                </li>
+                            </ul>
+                            <!-- Sepet ikonu eklenmiş buton -->
+                            <div class="col">
+                                <a class="btn" asp-action="Index" asp-controller="Basket">
+                                    <i class="fas fa-shopping-cart"></i> (@count)
+                                </a>
+                            </div>
+                            <partial name="_LoginPartial" />
+                            <!-- Defter simgesi eklenmiş -->
+                            <a type="submit" asp-action="MyOrderList" asp-controller="Order" asp-route-userId="userId" class="nav-link text-dark">
+                                <i class="fas fa-book"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div style="height: 60px;"></div> <!-- Dropdown menü için boşluk bırakıldı -->
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3 content">
+            <!-- İçerik alanı için üst boşluk ayarlandı -->
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-10">
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
